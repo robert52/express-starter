@@ -1,11 +1,28 @@
 'use strict';
 
-module.exports.ensured = function ensureAuthenticated(req, res, next) {
+/**
+ * Module exports
+ */
+module.exports.ensured = ensureAuthenticated
+
+/**
+ *  Checks if a user is authenticated or not
+ *  content negotiation is present
+ */
+function ensureAuthenticated(req, res, next) {
   if (req.isAuthenticated()) {
     return next();
   }
 
-  res.status(401).send({
-    message: 'Please authenticate.'
+  res.format({
+    html: function() {
+      res.redirect('/signin');
+    },
+    text: function() {
+      res.redirect('/signin');
+    },
+    json: function() {
+      res.status(401).json({ message: 'Unauthorized' });
+    }
   });
 };
