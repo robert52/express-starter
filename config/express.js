@@ -43,6 +43,8 @@ module.exports.init = function(app) {
   app.use(passport.session());
 
   app.use(function(req, res, next) {
+    // a simple object that holds resources for each request
+    req.resources = req.resources || {};
     res.locals.app = config.app;
 
     next();

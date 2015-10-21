@@ -1,11 +1,23 @@
 'use strict';
 
+/**
+ *  Module dependencies
+ */
 var _ = require('lodash');
 var mongoose = require('mongoose');
 var User = mongoose.model('User');
 var ObjectId = mongoose.Types.ObjectId;
 
-module.exports.findById = function findById(req, res, next, id) {
+/**
+ *  Module exports
+ */
+module.exports.findById = findUserById;
+module.exports.getOne = getOneUser;
+module.exports.getAll = getAllUsers;
+module.exports.update = updateUser;
+module.exports.delete = deleteUser;
+
+function findUserById(req, res, next, id) {
   if (!ObjectId.isValid(id)) {
     return res.status(404).json({ message: 'Not found.'});
   }
@@ -14,7 +26,7 @@ module.exports.findById = function findById(req, res, next, id) {
     if (err) {
       next(err);
     } else if (user) {
-      req._user = _user;
+      req.resources.user = user;
       next();
     } else {
       next(new Error('failed to find user'));
@@ -22,15 +34,15 @@ module.exports.findById = function findById(req, res, next, id) {
   });
 };
 
-module.exports.getOne = function getOneExpense(req, res, next) {
-  if (!req._user) {
+function getOneUser(req, res, next) {
+  if (!req.resources.user) {
     return res.status(404).json({ message: 'Not found.'});
   }
 
   res.json(req._user);
 };
 
-module.exports.getAll = function getAllExpenses(req, res, next) {
+function getAllUsers(req, res, next) {
   User.find(function(err, users) {
     if (err) {
       return next(err);
@@ -40,12 +52,11 @@ module.exports.getAll = function getAllExpenses(req, res, next) {
   });
 };
 
-module.exports.update = function updateExpense(req, res, next) {
-  var expense = req._user;
+function updateUser(req, res, next) {
+  var user = req.resources.user;
+  _.assign(user, req.body);
 
-  _.assign(_user, req.body);
-
-  _user.save(function(err, updatedUser) {
+  user.save(function(err, updatedUser) {
     if (err) {
       return next(err);
     }
@@ -54,8 +65,8 @@ module.exports.update = function updateExpense(req, res, next) {
   });
 };
 
-module.exports.delete = function deleteExpense(req, res, next) {
-  req._user.remove(function(err) {
+function deleteUser(req, res, next) {
+  req.resources.user.remove(function(err) {
     if (err) {
       return next(err);
     }
