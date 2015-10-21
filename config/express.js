@@ -7,12 +7,30 @@ var serveStatic = require('serve-static');
 var expressValidator = require('express-validator');
 var session = require('express-session');
 var passport = require('passport');
+var swig = require('swig');
 var MongoStore = require('connect-mongo')(session);
 var config = require('./index');
 
 module.exports.init = function(app) {
   var env = app.get('env');
   var root = app.get('root');
+
+
+  /**
+   * Configure view engine
+   */
+  app.engine('html', swig.renderFile);
+  app.set('views', root + '/app/views');
+  app.set('view engine', 'html');
+  if (config.swig.cache) {
+    swig.setDefaults({ cache: 'memory' });
+  } else {
+    swig.setDefaults({ cache: false });
+  }
+
+  if (config.proxy.trust) {
+    app.enable('trust proxy');
+  }
 
   /**
    * Common express configs
@@ -58,6 +76,9 @@ module.exports.init = function(app) {
     // a simple object that holds resources for each request
     req.resources = req.resources || {};
     res.locals.app = config.app;
+
+    // mock i18n funciton
+    res.locals._t = function (value) { return value };
 
     next();
   });

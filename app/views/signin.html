@@ -1,0 +1,46 @@
+{% extends "./layout.html" %}
+
+{% block header %}{% endblock %}
+
+{% block content %}
+<section class="authentification-section" id="signup">
+  <div class="container">
+    <div class="card form-card form-small form-block whiteframe-z2">
+      <h1 class="logo">{{ app.name }}</h1>
+      <h4>{{ _t("Login to your account") }}</h4>
+
+      {% if error_message %}
+      <div class="has-error">
+        <label class="control-label">{{ error_message }}</label>
+      </div>
+      {% endif %}
+      {% if sess.historyData.errorMessage %}
+      <div class="has-error">
+        <label class="control-label">{{ sess.historyData.errorMessage }}</label>
+      </div>
+      {% endif %}
+      <form action='{{ base_url }}/auth/signin' method='post' id="js-form">
+        <div class="form-group">
+          <input class="form-control" type='text' name='email' placeholder='{{ _t("Email address") }}' />
+        </div>
+        <div class="form-group">
+          <input class="form-control" type='password' name='password' placeholder='{{ _t("Password") }}' />
+        </div>
+        <div class="form-group">
+          <button class="button primary block" type="submit">{{ _t("Sign in") }}</button>
+        </div>
+        <!-- <div class="form-group text-center">
+          <a href="{{ base_url }}/forgot/password">{{ _t("Forgot your password?") }}</a>
+        </div> -->
+      </form>
+
+      <div class="already-account">
+        {{ _t("No account?") }}
+        <a href='{{ base_url }}/signup' data-trigger="manual" title="">{{ _t("Create one now.") }}</a>
+      </div>
+    </div>
+  </div>
+</section>
+{% endblock %}
+
+{% block footer %}{% endblock %}

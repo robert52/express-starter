@@ -1,0 +1,214 @@
+@import 'normalize.less';
+@import 'variables.less';
+
+* {
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box
+}
+
+:after,:before {
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box
+}
+
+html,
+body {
+  height: 100%;
+  max-height: 100%;
+  font-size: @baseFontSize;
+}
+
+body {
+  max-height: 100%;
+  color: @baseFontColor;
+  font-size: @baseBodyFontSize;
+  font-family: @baseFontFamily;
+  line-height: @baseBodyFontSize;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+.container {
+  margin: 0 auto;
+  max-width: 40em;
+
+  &.large {
+    max-width: 60em;
+  }
+
+  &::after,
+  &::before {
+    display: table;
+    content: " ";
+  }
+
+  &::after,
+  &::before {
+    clear: both;
+  }
+}
+
+.card {
+  padding: 1.8em;
+  border-radius: @inputBorderRadius;
+}
+
+.whiteframe-z2 {
+  box-shadow: 0 2px 4px -1px rgba(0, 0, 0, 0.14), 0 4px 5px 0 rgba(0, 0, 0, 0.098), 0 1px 10px 0 rgba(0, 0, 0, 0.084);
+}
+
+.button {
+  -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+  background-color: @grayLight;
+  border-radius: @inputBorderRadius;
+  border: none;
+  color: @baseFontColor;
+  cursor: pointer;
+  display: inline-block;
+  font-weight: 500;
+  height: @inputHeight;
+  line-height: @inputHeight;
+  outline: none;
+  padding: 0 24px;
+  text-align: center;
+  text-decoration: none;
+  transition: all 0.2s ease-in-out;
+  white-space: nowrap;
+  width: auto;
+
+  &:hover {
+    background-color: darken(@grayLight, 4%);
+  }
+  &:active, &:focus, &.active {
+    background-color: darken(@grayLight, 8%);
+  }
+  &:visited {
+    color: @baseFontColor;
+  }
+
+  &.primary {
+    background-color: @primary;
+    color: white;
+    &:hover {
+      background-color: darken(@primary, 4%);
+    }
+    &:active, &:focus, &.active {
+      background-color: darken(@primary, 8%);
+    }
+  }
+
+  &.facebook {
+    background-color: @facebook;
+    color: white;
+    &:hover {
+      background-color: darken(@facebook, 4%);
+    }
+    &:active, &:focus, &.active {
+      background-color: darken(@facebook, 8%);
+    }
+  }
+
+  &.twitter {
+    background-color: @twitter;
+    color: white;
+    &:hover {
+      background-color: darken(@twitter, 4%);
+    }
+    &:active, &:focus, &.active {
+      background-color: darken(@twitter, 8%);
+    }
+  }
+
+  &.block {
+    width: 100%;
+  }
+
+  &.small {
+    height: @inputHeight - 14;
+    line-height: @inputHeight - 14;
+    font-size: @baseBodyFontSize - 4;
+  }
+
+  &.link {
+    background-color: transparent;
+    &:hover {
+      color: darken(@primary, 4%);
+    }
+    &:active, &:focus, &.active {
+      color: darken(@primary, 8%);
+    }
+  }
+
+  &.green {
+    background-color: @success;
+    color: white;
+    &:hover {
+      background-color: darken(@success, 4%);
+    }
+    &:active, &:focus, &.active {
+      background-color: darken(@success, 8%);
+    }
+  }
+  /*
+  &.light {
+    background-color: #fff;
+    border: 1px solid $gray_light;
+    color: $primary;
+    line-height: $input_height - 2;
+    margin-left: 24px;
+    &:hover {
+      border-color: darken($gray_light, 5%);
+    }
+    &:active, &:focus {
+      border-color: $primary_light;
+    }
+  }
+  */
+}
+
+.form-control {
+  -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+  background-color: #fff;
+  border-radius: @inputBorderRadius;
+  border: solid 1px @grayLight;
+  box-sizing: border-box;
+  clear: both;
+  display: block;
+  //float: left;
+  font-family: inherit;
+  font-size: @baseBodyFontSize;
+  font-weight: normal;
+  height: @inputHeight;
+  line-height: @inputHeight - 2;
+  outline: none;
+  padding-left: @inputPadding;
+  padding-right: @inputPadding;
+  position: relative;
+  text-align: left !important;
+  transition: all 0.2s ease-in-out;
+  user-select: none;
+  white-space: nowrap;
+  width: auto;
+}
+
+.form-group {
+  margin-bottom: 15px;
+}
+
+.form-card {
+  margin-top: 10em;
+}
+
+.form-small {
+  margin-left: auto;
+  margin-right: auto;
+  width: 20em;
+}
+
+.form-block {
+  .form-control {
+    width: 100%;
+  }
+}

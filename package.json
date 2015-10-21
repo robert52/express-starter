@@ -11,7 +11,9 @@
   "scripts": {
     "start": "node app.js",
     "unit": "mocha tests/unit/ --ui bdd --recursive --reporter spec --timeout 10000 --slow 900",
-    "integration": "mocha tests/integration/ --ui bdd --recursive --reporter spec --timeout 10000 --slow 900"
+    "integration": "mocha tests/integration/ --ui bdd --recursive --reporter spec --timeout 10000 --slow 900",
+    "less": "node_modules/.bin/autoless public/assets/less public/assets/css --no-watch",
+    "less-watch": "node_modules/.bin/autoless public/assets/less public/assets/css"
   },
   "dependencies": {
     "async": "^0.9.2",
@@ -29,6 +31,7 @@
     "swig": "^1.4.2"
   },
   "devDependencies": {
+    "autoless": "^0.1.7",
     "chai": "^2.3.0",
     "chai-things": "^0.2.0",
     "mocha": "^2.3.3",

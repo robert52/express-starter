@@ -1,0 +1,54 @@
+{% extends "./layout.html" %}
+
+{% block header %}{% endblock %}
+
+{% block content %}
+<section class="authentification-section" id="signup">
+  <div class="container">
+    <div class="card form-card form-small form-block whiteframe-z2">
+      <h1 class="logo">{{ app.name }}</h1>
+      <h4>{{ _t("Create new account") }}</h4>
+      {% if sess.historyData.errorMessage %}
+      <div class="has-error">
+        <label class="control-label">{{ sess.historyData.errorMessage }}</label>
+      </div>
+      {% endif %}
+      <form action='{{ base_url }}/signup' method='post' id="js-form">
+        <div class="form-group">
+          <input class="form-control"
+          type='text' name='name' placeholder='{{ _t("Full name") }}' value="{{ sess.historyData.name }}" />
+        </div>
+        <div class="form-group">
+          <input class="form-control"
+          type='text' name='email' placeholder="{{ _t('Email') }}" value="{{ sess.historyData.email }}" />
+        </div>
+        <div class="form-group">
+          <input class="form-control" type='password' name='password' placeholder="{{ _t('Password') }}" />
+        </div>
+        <div class="form-group">
+          <input class="form-control"
+                 type='password' name='password_confirm'
+                 placeholder='{{ _t("Confirm Password") }}' />
+        </div>
+        <div class="form-group">
+          <div class="checkbox">
+            <label>
+              <input type="checkbox" name="terms" value="accepted">
+              {% set
+                tnc = _t("I have read and accept the junimea Terms & Conditions.", { link: "/terms" })
+              %}
+              {% autoescape false %}{{ tnc }}{% endautoescape %}
+            </label>
+          </div>
+        </div>
+        <div class="form-group">
+          <button class="button primary block" type="submit">{{ _t("Create account") }}</button>
+        </div>
+      </form>
+      <div class="already-account">
+        <p>{{ _t("Already have an account?") }} <a href='{{ base_url }}/signin' title="Existing account sign in">{{ _t("You can login here") }}</a></p>
+      </div>
+    </div>
+  </div>
+</section>
+{% endblock %}

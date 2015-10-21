@@ -1,0 +1,50 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8" />
+  <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <!-- google webmasters code here -->
+  <!-- <meta name="google-site-verification" content="<google_code_here>" /> -->
+
+  <link rel="icon" href="{{ baseUrl }}/img/favicon.ico">
+
+<!--
+  <link rel="icon" href="{{ baseUrl }}/img/favicon-32.ico" sizes="32x32">
+  <link rel="icon" href="{{ baseUrl }}/img/favicon-48.ico" sizes="48z48">
+  <link rel="icon" href="{{ baseUrl }}/img/favicon-64.ico" sizes="64x64">
+  <link rel="icon" href="{{ baseUrl }}/img/favicon-128.ico" sizes="128x128">
+-->
+
+
+  <title>{% block title %}Express Starter{% endblock %}</title>
+
+  {% block head %}
+  {% include "includes/stylesheets.html" %}
+  {% endblock %}
+
+  {% include "includes/google_analytics.html" %}
+</head>
+<body>
+  <header>
+    {% block header %}
+    {% include "includes/header.html" %}
+    {% endblock %}
+  </header>
+
+  <main>
+    {% block content %}{% endblock %}
+  </main>
+
+  <footer>
+    {% block footer %}
+    {% include "includes/footer.html" %}
+    {% endblock %}
+  </footer>
+
+  {% block scripts %}
+  {% include "includes/scripts.html" %}
+  {% endblock %}
+</body>
+</html>

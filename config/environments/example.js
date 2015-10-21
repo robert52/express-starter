@@ -13,5 +13,11 @@ module.exports = {
   serveStatic: true,
   session: {
     secret: 'someVeRyN1c3S#cr3tHer34U'
-  }
+  },
+  proxy: {
+    trust: true
+  },
+  swig: {
+    cache: false
+  },
 };

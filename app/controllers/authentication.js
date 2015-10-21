@@ -3,7 +3,6 @@
 /**
  *  Module dependencies
  */
-var _ = require('lodash');
 var passport = require('passport');
 var mongoose = require('mongoose');
 
@@ -26,7 +25,17 @@ function signinUser(req, res, next) {
         return next(err);
       }
 
-      res.status(200).json(user);
+      res.format({
+        html: function() {
+          res.redirect('/signin');
+        },
+        text: function() {
+          res.redirect('/signin');
+        },
+        json: function() {
+          res.status(200).json(user);
+        }
+      });
     });
   })(req, res, next);
 };
