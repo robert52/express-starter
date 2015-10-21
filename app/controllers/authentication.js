@@ -17,7 +17,20 @@ module.exports.signin = signinUser;
 function signinUser(req, res, next) {
   passport.authenticate('local', function(err, user, info) {
     if (err || !user) {
-      return res.status(400).send(info);
+      return res.format({
+        html: function() {
+          req.session.historyData = info;
+          res.redirect('/signin');
+        },
+        // just in case :)
+        text: function() {
+          req.session.historyData = info;
+          res.redirect('/signin');
+        },
+        json: function() {
+          res.status(400).json(info);
+        }
+      });
     }
 
     req.logIn(user, function(err) {
@@ -27,12 +40,16 @@ function signinUser(req, res, next) {
 
       res.format({
         html: function() {
-          res.redirect('/signin');
+          delete req.session.historyData;
+          res.redirect('/');
         },
+        // just in case :)        
         text: function() {
-          res.redirect('/signin');
+          delete req.session.historyData;
+          res.redirect('/');
         },
         json: function() {
+          delete req.session.historyData;
           res.status(200).json(user);
         }
       });

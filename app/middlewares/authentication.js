@@ -18,6 +18,7 @@ function ensureAuthenticated(req, res, next) {
     html: function() {
       res.redirect('/signin');
     },
+    // just in case :)    
     text: function() {
       res.redirect('/signin');
     },

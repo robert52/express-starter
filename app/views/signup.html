@@ -8,11 +8,13 @@
     <div class="card form-card form-small form-block whiteframe-z2">
       <h1 class="logo">{{ app.name }}</h1>
       <h4>{{ _t("Create new account") }}</h4>
-      {% if sess.historyData.errorMessage %}
+
+      {% if historyData.message %}
       <div class="has-error">
-        <label class="control-label">{{ sess.historyData.errorMessage }}</label>
+        <p>{{ historyData.message }}</p>
       </div>
       {% endif %}
+
       <form action='{{ base_url }}/signup' method='post' id="js-form">
         <div class="form-group">
           <input class="form-control"

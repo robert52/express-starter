@@ -9,16 +9,12 @@
       <h1 class="logo">{{ app.name }}</h1>
       <h4>{{ _t("Login to your account") }}</h4>
 
-      {% if error_message %}
+      {% if historyData.message %}
       <div class="has-error">
-        <label class="control-label">{{ error_message }}</label>
+        <p>{{ historyData.message }}</p>
       </div>
       {% endif %}
-      {% if sess.historyData.errorMessage %}
-      <div class="has-error">
-        <label class="control-label">{{ sess.historyData.errorMessage }}</label>
-      </div>
-      {% endif %}
+      
       <form action='{{ base_url }}/auth/signin' method='post' id="js-form">
         <div class="form-group">
           <input class="form-control" type='text' name='email' placeholder='{{ _t("Email address") }}' />
