@@ -12,17 +12,16 @@ var ObjectId = mongoose.Types.ObjectId;
  *  Module exports
  */
 module.exports.findById = findUserById;
-module.exports.getOne = getOneUser;
 module.exports.getAll = getAllUsers;
 module.exports.update = updateUser;
 module.exports.delete = deleteUser;
 
-function findUserById(req, res, next, id) {
-  if (!ObjectId.isValid(id)) {
-    return res.status(404).json({ message: 'Not found.'});
+function findUserById(req, res, next) {
+  if (!ObjectId.isValid(req.params.userId)) {
+    return res.status(404).json({ message: '404 not found.'});
   }
 
-  User.findById(id, function(err, user) {
+  User.findById(req.params.userId, function(err, user) {
     if (err) {
       next(err);
     } else if (user) {
@@ -34,21 +33,14 @@ function findUserById(req, res, next, id) {
   });
 };
 
-function getOneUser(req, res, next) {
-  if (!req.resources.user) {
-    return res.status(404).json({ message: 'Not found.'});
-  }
-
-  res.json(req._user);
-};
-
 function getAllUsers(req, res, next) {
   User.find(function(err, users) {
     if (err) {
       return next(err);
     }
 
-    res.json(users);
+    req.resources.users = users;
+    next();
   });
 };
 
@@ -61,7 +53,8 @@ function updateUser(req, res, next) {
       return next(err);
     }
 
-    res.json(updatedUser);
+    res.resources.user = updatedUser;
+    next();
   });
 };
 

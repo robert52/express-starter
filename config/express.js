@@ -76,6 +76,7 @@ module.exports.init = function(app) {
     // a simple object that holds resources for each request
     req.resources = req.resources || {};
     res.locals.app = config.app;
+    res.locals.currentUser = req.user;
     // mock i18n funciton
     res.locals._t = function (value) { return value; };
     res.locals._s = function (obj) { return JSON.stringify(obj); };

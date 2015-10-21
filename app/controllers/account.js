@@ -3,6 +3,7 @@
 /**
  *  Module dependencies
  */
+var _ = require('lodash');
 var mongoose = require('mongoose');
 var User = mongoose.model('User');
 
@@ -12,27 +13,38 @@ var User = mongoose.model('User');
 module.exports.signup = signupUser;
 
 function signupUser(req, res, next) {
-  req.session.historyData = req.body;
+  req.session.historyData = _.omit(req.body, 'password');
+
+  // TODO: refactor validation
+  if (!req.body.email) {
+    req.session.historyData.message = 'E-mail is required'
+    return res.redirect('signup');
+  }
+
+  if (!req.body.password) {
+    req.session.historyData.message = 'Password is required'
+    return res.redirect('signup');
+  }
 
   if (req.body.password !== req.body.password_confirm) {
-    req.session.historyData.errorMessage = 'Password confirmation should match'
+    req.session.historyData.message = 'Password confirmation should match'
     return res.redirect('signup');
   }
 
   var userData = _.pick(req.body, 'name', 'email', 'password');
   User.register(userData, function(err, user) {
     if (err && (11000 === err.code || 11001 === err.code)) {
-      req.session.historyData.errorMessage = 'E-mail is already in use.'
+      req.session.historyData.message = 'E-mail is already in use.'
       return res.redirect('signup');
     }
 
     if (err) {
-      req.session.historyData.errorMessage = 'Something went wrogn, please try later.'
+      req.session.historyData.message = 'Something went wrogn, please try later.'
       return res.redirect('signup');
     }
 
     req.logIn(user, function(err) {
-      req.session.historyData = undefined;
+      delete req.session.historyData;
       res.redirect('/');
     });
   });

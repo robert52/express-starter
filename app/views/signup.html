@@ -18,11 +18,11 @@
       <form action='{{ base_url }}/signup' method='post' id="js-form">
         <div class="form-group">
           <input class="form-control"
-          type='text' name='name' placeholder='{{ _t("Full name") }}' value="{{ sess.historyData.name }}" />
+          type='text' name='name' placeholder='{{ _t("Full name") }}' value="{{ historyData.name }}" />
         </div>
         <div class="form-group">
           <input class="form-control"
-          type='text' name='email' placeholder="{{ _t('Email') }}" value="{{ sess.historyData.email }}" />
+          type='text' name='email' placeholder="{{ _t('Email') }}" value="{{ historyData.email }}" />
         </div>
         <div class="form-group">
           <input class="form-control" type='password' name='password' placeholder="{{ _t('Password') }}" />
@@ -31,17 +31,6 @@
           <input class="form-control"
                  type='password' name='password_confirm'
                  placeholder='{{ _t("Confirm Password") }}' />
-        </div>
-        <div class="form-group">
-          <div class="checkbox">
-            <label>
-              <input type="checkbox" name="terms" value="accepted">
-              {% set
-                tnc = _t("I have read and accept the junimea Terms & Conditions.", { link: "/terms" })
-              %}
-              {% autoescape false %}{{ tnc }}{% endautoescape %}
-            </label>
-          </div>
         </div>
         <div class="form-group">
           <button class="button primary block" type="submit">{{ _t("Create account") }}</button>

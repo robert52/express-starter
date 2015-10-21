@@ -8,11 +8,22 @@
     <div class="card form-block whiteframe-z2">
       <h1 class="logo">{{ app.name }}</h1>
       <h4>{{ _t("Simple starting point for an Express application.") }}</h4>
+
+      {% if !currentUser %}
       <p>
-        <a href="{{ baseUrl }}/signin" class="button">Sign in</a>
+        <a href="{{ baseUrl }}/signin" class="button primary">Sign in</a>
         <span> or </span>
-        <a href="{{ baseUrl }}/signup" class="button primary">Sign up</a>
+        <a href="{{ baseUrl }}/signup" class="button">Register</a>
       </p>
+      {% endif %}
+
+      {% if currentUser %}
+      <p>
+        <a href="{{ baseUrl }}/account" class="button primary">Change account info</a>
+        <span> or </span>
+        <a href="{{ baseUrl }}/auth/signout" class="button">Sign out</a>
+      </p>
+      {% endif %}
     </div>
   </div>
 </section>

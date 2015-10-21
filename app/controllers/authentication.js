@@ -10,6 +10,7 @@ var mongoose = require('mongoose');
  *  Module exports
  */
 module.exports.signin = signinUser;
+module.exports.signout = signoutUser;
 
 /**
  *  Uses Passport's local strategy to sign in a user
@@ -43,7 +44,7 @@ function signinUser(req, res, next) {
           delete req.session.historyData;
           res.redirect('/');
         },
-        // just in case :)        
+        // just in case :)
         text: function() {
           delete req.session.historyData;
           res.redirect('/');
@@ -56,3 +57,9 @@ function signinUser(req, res, next) {
     });
   })(req, res, next);
 };
+
+function signoutUser(req, res, next) {
+  req.logout();
+  delete req.session.historyData;
+  res.redirect('/');
+}

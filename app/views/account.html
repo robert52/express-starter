@@ -1,0 +1,49 @@
+{% extends "./layout.html" %}
+
+{% block header %}{% endblock %}
+
+{% block content %}
+<section class="authentification-section" id="signup">
+  <div class="container">
+    <div class="card form-card form-small form-block whiteframe-z2">
+      <h4>{{ _t("Edit account information") }}</h4>
+
+      {% if historyData.message %}
+      <div class="has-error">
+        <p>{{ historyData.message }}</p>
+      </div>
+      {% endif %}
+
+      <form action='{{ base_url }}/account/edit' method='post'>
+        <div class="form-group">
+          <input class="form-control"
+          type='text' name='name' placeholder='{{ _t("Full name") }}' value="{{ currentUser.name }}" />
+        </div>
+        <div class="form-group">
+          <input class="form-control"
+          type='text' placeholder="{{ _t('Email') }}" value="{{ currentUser.email }}" disabled="true" />
+        </div>
+        <div class="form-group">
+          <button class="button block" type="submit">{{ _t("Save changes") }}</button>
+        </div>
+      </form>
+
+      <h4>{{ _t("Change password") }}</h4>
+      <form action='{{ base_url }}/account/password' method='post'>
+        <div class="form-group">
+          <input class="form-control" type='old_password' name='password' placeholder="{{ _t('Password') }}" />
+        </div>
+        <div class="form-group">
+          <input class="form-control" type='password' name='password' placeholder="{{ _t('Password') }}" />
+        </div>
+        <div class="form-group">
+          <input class="form-control" type='password' name='password_confirm' placeholder='{{ _t("Confirm Password") }}' />
+        </div>
+        <div class="form-group">
+          <button class="button block" type="submit">{{ _t("Change password") }}</button>
+        </div>
+      </form>
+    </div>
+  </div>
+</section>
+{% endblock %}
