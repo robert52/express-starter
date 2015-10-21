@@ -6,7 +6,7 @@ var config = require('./index');
 module.exports.init = init;
 
 function init(app) {
-  mongoose.connect(config['mongodb'].uri);
+  mongoose.connect(config.mongodb.uri);
 
   // If the Node process ends, cleanup existing connections
   process.on('SIGINT', cleanup);

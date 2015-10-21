@@ -7,6 +7,7 @@ var serveStatic = require('serve-static');
 var expressValidator = require('express-validator');
 var session = require('express-session');
 var passport = require('passport');
+var MongoStore = require('connect-mongo')(session);
 var config = require('./index');
 
 module.exports.init = function(app) {
@@ -24,15 +25,26 @@ module.exports.init = function(app) {
 
   switch(env) {
     case 'production':
+      app.use(session({
+        secret: config.session.secret,
+        key: 'skey.sid',
+        resave: false,
+        saveUninitialized: false,
+        store: new MongoStore({
+          url: config.mongodb.uri
+        })
+      }));
+
+      break;
+    case 'staging':
     case 'test':
     case 'development':
-    case 'staging':
     default:
       app.use(session({
         secret: config.session.secret,
         key: 'skey.sid',
         resave: false,
-        saveUninitialized: true
+        saveUninitialized: false
       }));
   }
 
