@@ -11,6 +11,11 @@ var LEN = 16;
 var crypto = require('crypto');
 
 /**
+ * Module exports
+ */
+module.exports.generate = generateToken;
+
+/**
  * Generates a random token using Node's crypto RNG
  *
  * @param {Number} randomBytes - random bytes to generate
@@ -35,5 +40,3 @@ function generateToken(randomBytes, callback) {
     callback(null, token);
   });
 };
-
-module.exports.generate = generateToken;

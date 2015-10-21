@@ -13,6 +13,13 @@ var DIGEST = 'sha256';
  */
 var crypto = require('crypto');
 
+
+/**
+ * Module exports
+ */
+module.exports.hash = hashPassword;
+module.exports.verify = verify;
+
 /**
  * Creates a hash based on a salt from a given password
  * if there is no salt a new salt will be generated
@@ -51,8 +58,6 @@ function hashPassword(password, salt, callback) {
   }
 }
 
-module.exports.hash = hashPassword;
-
 /**
  * Verifies if a password matches a hash by hashing the password
  * with a given salt
@@ -75,5 +80,3 @@ function verify(password, hash, salt, callback) {
     }
   });
 }
-
-module.exports.verify = verify;
