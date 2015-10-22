@@ -41,29 +41,23 @@ module.exports.init = function(app) {
   app.use(methodOverride());
   app.disable('x-powered-by');
 
+  var sessionOpts = {
+    secret: config.session.secret,
+    key: 'skey.sid',
+    resave: false,
+    saveUninitialized: false
+  };
+
   switch(env) {
     case 'production':
-      app.use(session({
-        secret: config.session.secret,
-        key: 'skey.sid',
-        resave: false,
-        saveUninitialized: false,
-        store: new MongoStore({
-          url: config.mongodb.uri
-        })
-      }));
-
-      break;
+      sessionOpts.store = new MongoStore({
+        url: config.mongodb.uri
+      });
     case 'staging':
     case 'test':
     case 'development':
     default:
-      app.use(session({
-        secret: config.session.secret,
-        key: 'skey.sid',
-        resave: false,
-        saveUninitialized: false
-      }));
+      app.use(session(sessionOpts));
   }
 
   /**
