@@ -24,9 +24,6 @@ var UserSchema = new Schema({
     required: true,
     select: false
   },
-  phoneNumber: {
-    type: String
-  },
   active: {
     type: Boolean,
     default: true

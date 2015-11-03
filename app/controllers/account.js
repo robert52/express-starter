@@ -17,17 +17,17 @@ function signupUser(req, res, next) {
 
   // TODO: refactor validation
   if (!req.body.email) {
-    req.session.historyData.message = 'E-mail is required'
+    req.session.historyData.message = 'E-mail is required.'
     return res.redirect('signup');
   }
 
   if (!req.body.password) {
-    req.session.historyData.message = 'Password is required'
+    req.session.historyData.message = 'Password is required.'
     return res.redirect('signup');
   }
 
   if (req.body.password !== req.body.password_confirm) {
-    req.session.historyData.message = 'Password confirmation should match'
+    req.session.historyData.message = 'Password confirmation should match password.'
     return res.redirect('signup');
   }
 
@@ -39,7 +39,7 @@ function signupUser(req, res, next) {
     }
 
     if (err) {
-      req.session.historyData.message = 'Something went wrogn, please try later.'
+      req.session.historyData.message = 'Something went wrong, please try later.'
       return res.redirect('signup');
     }
 
