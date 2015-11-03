@@ -6,15 +6,15 @@
 <section class="authentification-section" id="signup">
   <div class="container">
     <div class="card form-card form-small form-block whiteframe-z2">
-      <h1 class="logo">{{ app.name }}</h1>
-      <h4>{{ _t("Login to your account") }}</h4>
+      <h3 class="logo">{{ app.name }}</h3>
+      <p>{{ _t("Sign in to your account") }}</p>
 
       {% if historyData.message %}
       <div class="has-error">
         <p>{{ historyData.message }}</p>
       </div>
       {% endif %}
-      
+
       <form action='{{ base_url }}/auth/signin' method='post' id="js-form">
         <div class="form-group">
           <input class="form-control" type='text' name='email' placeholder='{{ _t("Email address") }}' />

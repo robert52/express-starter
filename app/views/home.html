@@ -1,29 +1,57 @@
 {% extends "./layout.html" %}
 
-{% block header %}{% endblock %}
+{% block header %}
+  <div class="main-header bg-img">
+    <div class="vertical">
+      <div class="container">
+        <h1>{{ app.name }}</h1>
+        <h4>{{ _t("Simple starting point for an Express application.") }}</h4>
+
+        {% if !currentUser %}
+        <p>
+          <a href="{{ baseUrl }}/signin" class="button primary">Sign in</a>
+          <span> or </span>
+          <a href="{{ baseUrl }}/signup" class="button">Register</a>
+        </p>
+        {% endif %}
+
+        {% if currentUser %}
+        <p>
+          <a href="{{ baseUrl }}/account" class="button primary">Change account info</a>
+          <span> or </span>
+          <a href="{{ baseUrl }}/auth/signout" class="button">Sign out</a>
+        </p>
+        {% endif %}
+      </div>
+    </div>
+  </div>
+{% endblock %}
 
 {% block content %}
 <section class="home-section">
   <div class="container">
     <div class="card form-block whiteframe-z2">
-      <h1 class="logo">{{ app.name }}</h1>
-      <h4>{{ _t("Simple starting point for an Express application.") }}</h4>
+      <h2 class="logo">Simple boilerplate code</h2>
+      <p>No fancy solution, just a simple a codebase, to get you started on your project.</p>
+    </div>
 
-      {% if !currentUser %}
-      <p>
-        <a href="{{ baseUrl }}/signin" class="button primary">Sign in</a>
-        <span> or </span>
-        <a href="{{ baseUrl }}/signup" class="button">Register</a>
-      </p>
-      {% endif %}
+    <div class="card form-block whiteframe-z2">
+      <h2 class="logo">Swig for your templates</h2>
+      <p>Easy to use, powerful and extendable JavaScript template engine. Express compatible, similar to methodologies as in Django, and Twig. Learn more about it <a href="http://paularmstrong.github.io/swig/">here</a></p>
+    </div>
 
-      {% if currentUser %}
-      <p>
-        <a href="{{ baseUrl }}/account" class="button primary">Change account info</a>
-        <span> or </span>
-        <a href="{{ baseUrl }}/auth/signout" class="button">Sign out</a>
-      </p>
-      {% endif %}
+    <div class="card form-block whiteframe-z2">
+      <h2 class="logo">Passport for authentication</h2>
+      <p>A commonly used authentication middleware for Node.js. It has a very large number of authentication strategies. Checkout the official <a href="http://passportjs.org/">website</a>.</p>
+    </div>
+
+    <div class="card form-block whiteframe-z2">
+      <h2 class="logo">MongoDB as storage</h2>
+      <p>Feel free to store your data as you like in <a href="https://www.mongodb.org/">MongoDB</a>. Model your schemas without hassle using <a href="http://mongoosejs.com/">mongoose</a>.</p>
+    </div>
+
+    <div>
+      Official {{ app.name }} GitHub <a href="https://github.com/robert52/express-starter">repository</a>
     </div>
   </div>
 </section>
